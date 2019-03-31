@@ -1,0 +1,13 @@
+
+.container {
+    background-color: darkorchid;
+    padding: 50px;
+}
+
+#showButton{
+    background-color: purple
+}
+
+.oppositeGif {
+    margin-left: 5px;
+}

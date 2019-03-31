@@ -3,95 +3,77 @@ $(document).ready(function () {
 
     //**DONE** Create for each loop that creates a new button for each item in the array when the page is loaded
 
-
-
     var topics = ["Laugh", "Cry", "Jump", "Sit", "Cat", "Dog", "Fun", "Boring", "Rain", "Sun", "Left", "Right", "Big", "Small", "Yum", "Eww", "Disney", "DreamWorks"];
 
-    function seeGifs(){
+    function seeGifs() {
         var gifItems = $(this).attr("data-name")
 
         var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
 
-        gifItems + "&api_key=dc6zaTOxFJmzC&limit=10";
+            gifItems + "&api_key=dc6zaTOxFJmzC&limit=10";
 
         $.ajax({
-            url:queryURL,
+            url: queryURL,
             method: "GET"
         })
 
-        .then(function(response){
-            console.log(response)
+            .then(function (response) {
+                console.log(response)
 
-            $("showGif").empty()
+                $("showGif").empty()
 
-            var responseArray = response.data
+                var responseArray = response.data
 
-            responseArray.forEach(function(responseItem){
-                console.log(responseItem.images.fixed_height.url)
+                responseArray.forEach(function (responseItem) {
+                    console.log(responseItem.images.fixed_height.url)
 
-                var newImageDiv = $("<div>")
+                    var newImageDiv = $("<div>")
 
-                var myImage = $("<img>")
+                    var myImage = $("<img>")
 
-                myImage.attr("src", responseItem.images.fixed_height.url)
-                myImage.addClass("myGif")
+                    myImage.attr("src", responseItem.images.fixed_height.url)
+                    myImage.addClass("myGif")
 
-                newImageDiv.append(myImage)
+                    newImageDiv.append(myImage)
 
-                var ratingPlace = $("<div>")
-                ratingPlace.text(responseItem.rating)
+                    var ratingPlace = $("<div>")
+                    ratingPlace.text("Rating: " + responseItem.rating)
 
-                newImageDiv.append(ratingPlace)
+                    newImageDiv.append(ratingPlace)
 
-                $("#showGif").append(newImageDiv)
-
-
-
+                    $("#showGif").append(newImageDiv)
+                })
             })
-
-        })
-
     }
-
 
     function displayButtons() {
 
         $("#showButton").empty();
 
-
         topics.forEach(function (topicsItems) {
             var newButton = $("<button>")
-                    newButton.addClass("oppositeGif")
-                        newButton.attr("data-name", topicsItems)
-                            newButton.text(topicsItems)
+            newButton.addClass("oppositeGif")
+            newButton.attr("data-name", topicsItems)
+            newButton.text(topicsItems)
 
             $("#showButton").append(newButton)
-
         })
     }
 
-    $(".findGif").on('click', function(event){
+    $(".findGif").on('click', function (event) {
 
         event.preventDefault()
 
         var userChoice = $("#userChoice").val().trim()
-      
+
         topics.push(userChoice)
 
         displayButtons()
-
-
     })
 
     displayButtons()
 
     $(document).on('click', ".oppositeGif", seeGifs)
 
-
-
-
-
-
-
-})                                                                               
+})
 
