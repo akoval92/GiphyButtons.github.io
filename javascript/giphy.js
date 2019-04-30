@@ -10,7 +10,7 @@ $(document).ready(function () {
 
         var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
 
-            gifItems + "&api_key=dc6zaTOxFJmzC&limit=10";
+            gifItems + "&api_key=NqLYJSa8F6JZSHyUV9m2auX6Bs03cJ8P&limit=10";
 
         $.ajax({
             url: queryURL,
